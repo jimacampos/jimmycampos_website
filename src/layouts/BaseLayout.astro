@@ -1,0 +1,28 @@
+---
+const { title } = Astro.props;
+---
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link href="/styles.css" rel="stylesheet" />
+  </head>
+  <body class="font-sans text-gray-900">
+    <header class="py-4 border-b">
+      <nav class="max-w-5xl mx-auto px-4 flex justify-between">
+        <a href="/" class="font-bold">JimmyCampos.com</a>
+        <ul class="flex gap-6">
+          <li><a href="/about">Acerca</a></li>
+          <li><a href="/talks">Charlas</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="max-w-4xl mx-auto">
+      <slot />
+    </main>
+    <footer class="py-8 border-t text-center text-sm text-gray-500">
+      © {new Date().getFullYear()} Jimmy Campos. Todos los derechos reservados.
+    </footer>
+  </body>
+</html>
