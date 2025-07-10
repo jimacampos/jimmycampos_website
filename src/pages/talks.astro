@@ -1,15 +1,25 @@
 ---
 import Layout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const talks = await getCollection('talks');
 ---
 
 <Layout title="Charlas y Talleres">
   <section class="prose mx-auto py-10 px-4">
     <h2>Presentaciones Destacadas</h2>
-    <h3>Construye tu Futuro en Tech: Acelera tu Carrera con IA</h3>
-    <p>Una charla para estudiantes y profesionales en transición, enfocada en cómo usar herramientas como GitHub Copilot, ChatGPT y Azure AI para potenciar su desarrollo.</p>
+
     <ul>
-      <li><a href="/assets/construye-tu-futuro.pdf">Descargar presentación (PDF)</a></li>
-      <li><a href="https://youtu.be/demo-url">Ver video demo</a></li>
+      {talks.map(talk => (
+        <li class="mb-6">
+          <h3 class="text-xl font-bold">{talk.data.title}</h3>
+          <p>{talk.data.description}</p>
+          <div class="mt-2 flex gap-4">
+            {talk.data.slides && <a href={talk.data.slides} class="text-blue-600 underline">Slides</a>}
+            {talk.data.video && <a href={talk.data.video} class="text-blue-600 underline">Video</a>}
+          </div>
+        </li>
+      ))}
     </ul>
   </section>
 </Layout>
